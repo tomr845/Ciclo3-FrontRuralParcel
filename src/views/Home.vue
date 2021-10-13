@@ -1,126 +1,126 @@
 <template>
   <div class="home">
     <div>
-      <b-container>
+      <b-container  class="cards-container">
+        
+        <h2 class="terrenosDisponibles" v-if="arrayTerrenos.length == 0">No hay terrenos registrados para mostrar</h2>
 
-        <h2 style="margin: 10%;" v-if="arrayTerrenos.length == 0">No hay terrenos registrados para mostrar</h2>
+        <b-card-group deck v-for="terreno of arrayTerrenos" class="title__item">
+          <b-card
+            title="Terreno"
+            img-src="https://picsum.photos/600/300/?image=25"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="max-width: 20rem; margin: 2%;"
+            class="item-container"
+          >
+            <b-card-text class="txtMargin list-card">Terreno Agrícola</b-card-text>
+            <b-card-text class="txtMargin list-card">Dueño: {{terreno.ownerName}}</b-card-text>
+            <b-card-text class="txtMargin list-card">Hectareas: {{terreno.numberHectares}}</b-card-text>
+            <b-card-text class="txtMargin list-card">Ubicación: {{terreno.locationTerritory}}</b-card-text>
+            <b-card-text class="txtMargin list-card">Sistema de riego: {{terreno.irrigationSystems}}</b-card-text>
+            <b-card-text class="txtMargin list-card">Estado: {{terreno.Abailability}}</b-card-text>
+            <b-card-text class="txtMargin list-card">Descripción: {{terreno.Descriptions}}</b-card-text>
 
-        <b-card-group v-for="terreno of arrayTerrenos">
-            <b-card
-              title="Terreno"
-              img-src="https://picsum.photos/600/300/?image=25"
-              img-alt="Image"
-              img-top
-              tag="article"
-              style="max-width: 20rem; margin: 2%;"
-            >
-                <b-card-text class="txtMargin">Terreno Agrícola</b-card-text>
-                <b-card-text class="txtMargin">Dueño: {{terreno.ownerName}}</b-card-text>
-                <b-card-text class="txtMargin">Hectareas: {{terreno.numberHectares}}</b-card-text>
-                <b-card-text class="txtMargin">Ubicación: {{terreno.locationTerritory}}</b-card-text>
-                <b-card-text class="txtMargin">Sistema de riego: {{terreno.irrigationSystems}}</b-card-text>
-                <b-card-text class="txtMargin">Estado: {{terreno.Abailability}}</b-card-text>
-                <b-card-text class="txtMargin">Descripción: {{terreno.Descriptions}}</b-card-text>
+            <b-button v-b-modal.terreno-1-editar variant="primary" class="botonCard">Editar</b-button>
+            <b-modal id="terreno-1-editar" title="Actualizar Terreno">
+              <div>
+                <b-form  v-if="show">
+                  <b-form-group id="input-group-1" label="Cantidad de hectáreas" label-for="input-1">
+                      <b-form-input
+                          id="input-1"
+                          v-model="form.nameCantidaHectareas"
+                          placeholder="Digite la cantidad de hectáreas"
+                          required
+                      ></b-form-input>
+                  </b-form-group>
+          
+                  <b-form-group id="input-group-2" label="Ubicación del terreno" label-for="input-2">
+                      <b-form-select
+                        id="input-group-2"
+                        v-model="form.ubicacionTerreno"
+                        :options="ubicacionTerreno"
+                        placeholder="Seleccione la ubicación de terreno"
+                        required
+                      ></b-form-select>
+                  </b-form-group>
+          
+                  <b-form-group id="input-group-3" label="Nombre del dueño de la tierra" label-for="input-3">
+                      <b-form-input
+                        id="input-3"
+                        v-model="form.nombreDuenio"
+                        placeholder="Digite el nombre del dueño de la tierra"
+                        required
+                      ></b-form-input>
+                  </b-form-group>
+          
+                  <b-form-group id="input-group-4" label="Sistema de riego:" label-for="input-4">
+                      <b-form-select
+                        id="input-4"
+                        v-model="form.sistemaRiego"
+                        :options="sistemaRiego"
+                        required
+                      ></b-form-select>
+                      
+                  </b-form-group>
+          
+                  <b-form-group id="input-group-5" label="Especificacioens del terreno:" label-for="input-5">
+                      <b-form-textarea 
+                        id="textarea" 
+                        v-model="text" 
+                        placeholder="Digite las especificaciones del terreno..." 
+                        rows="3" 
+                        max-rows="10"
+                      ></b-form-textarea>
+                  </b-form-group>
+          
+                  <b-form-group id="input-group-6" label="Seleccione las imagenes de su terreno:" label-for="input-6">
+                      <b-form-file 
+                        v-model="file1" 
+                        :state="Boolean(file1)" 
+                        placeholder="Seleccione las imagenes"
+                      ></b-form-file>
+                  </b-form-group>
+          
+                  <b-form-group id="input-group-7" label="Disponibilidad del terreno:" label-for="input-7">
+                      <b-form-select
+                          id="input-7"
+                          v-model="form.dispobilidadTerreno"
+                          :options="dispobilidadTerreno"
+                          required
+                          style="margin-bottom: -10%"
+                      ></b-form-select>
+                  </b-form-group>
+                </b-form>
+              </div>
+              <template #modal-footer="{ ok, cancel}">
 
-                <b-button v-b-modal.terreno-1-editar variant="primary" class="botonCard">Editar</b-button>
-                <b-modal id="terreno-1-editar" title="Actualizar Terreno">
-                  <div>
-                    <b-form  v-if="show">
-                      <b-form-group id="input-group-1" label="Cantidad de hectáreas" label-for="input-1">
-                          <b-form-input
-                              id="input-1"
-                              v-model="form.nameCantidaHectareas"
-                              placeholder="Digite la cantidad de hectáreas"
-                              required
-                          ></b-form-input>
-                      </b-form-group>
+                <!-- Botones del Modal -->
+                <b-button variant="primary" class="botonModal" @click="ok()">
+                  Registrar
+                </b-button>
+                <b-button variant="danger" class="botonModal" @click="cancel()">
+                  Cancelar
+                </b-button>
+              </template>
               
-                      <b-form-group id="input-group-2" label="Ubicación del terreno" label-for="input-2">
-                          <b-form-select
-                            id="input-group-2"
-                            v-model="form.ubicacionTerreno"
-                            :options="ubicacionTerreno"
-                            placeholder="Seleccione la ubicación de terreno"
-                            required
-                          ></b-form-select>
-                      </b-form-group>
-              
-                      <b-form-group id="input-group-3" label="Nombre del dueño de la tierra" label-for="input-3">
-                          <b-form-input
-                            id="input-3"
-                            v-model="form.nombreDuenio"
-                            placeholder="Digite el nombre del dueño de la tierra"
-                            required
-                          ></b-form-input>
-                      </b-form-group>
-              
-                      <b-form-group id="input-group-4" label="Sistema de riego:" label-for="input-4">
-                          <b-form-select
-                            id="input-4"
-                            v-model="form.sistemaRiego"
-                            :options="sistemaRiego"
-                            required
-                          ></b-form-select>
-                          
-                      </b-form-group>
-              
-                      <b-form-group id="input-group-5" label="Especificacioens del terreno:" label-for="input-5">
-                          <b-form-textarea 
-                            id="textarea" 
-                            v-model="text" 
-                            placeholder="Digite las especificaciones del terreno..." 
-                            rows="3" 
-                            max-rows="10"
-                          ></b-form-textarea>
-                      </b-form-group>
-              
-                      <b-form-group id="input-group-6" label="Seleccione las imagenes de su terreno:" label-for="input-6">
-                          <b-form-file 
-                            v-model="file1" 
-                            :state="Boolean(file1)" 
-                            placeholder="Seleccione las imagenes"
-                          ></b-form-file>
-                      </b-form-group>
-              
-                      <b-form-group id="input-group-7" label="Disponibilidad del terreno:" label-for="input-7">
-                          <b-form-select
-                              id="input-7"
-                              v-model="form.dispobilidadTerreno"
-                              :options="dispobilidadTerreno"
-                              required
-                              style="margin-bottom: -10%"
-                          ></b-form-select>
-                      </b-form-group>
-                    </b-form>
-                  </div>
-                  <template #modal-footer="{ ok, cancel}">
+            </b-modal>
+              <b-button  v-b-modal.terreno-6-eliminar variant="danger" class="botonCard"  @click="deleteTerreno(terreno._id)">Eliminar</b-button>
+            </b-modal>
 
-                    <!-- Botones del Modal -->
-                    <b-button variant="primary" class="botonModal" @click="ok()">
-                      Registrar
-                    </b-button>
-                    <b-button variant="danger" class="botonModal" @click="cancel()">
-                      Cancelar
-                    </b-button>
-                  </template>
-                </b-modal>
-                <b-button  v-b-modal.terreno-6-eliminar variant="danger" class="botonCard"  @click="deleteTerreno(terreno._id)">Eliminar</b-button>
-
-                  
-                </b-modal>
-            </b-card>
+            <template #modal-footer="{ ok, cancel}">
+            
+              <!-- Botones del Modal -->
+              <b-button variant="danger" class="botonModal" @click="ok()">
+                Eliminar
+              </b-button>
+              <b-button variant="primary" class="botonModal" @click="cancel()">
+                Cancelar
+              </b-button>
+            </template>
+          </b-card>
         </b-card-group>
-
-        <template #modal-footer="{ ok, cancel}">
-          <!-- Botones del Modal -->
-          <b-button variant="danger" class="botonModal" @click="ok()">
-            Eliminar
-          </b-button>
-          <b-button variant="primary" class="botonModal" @click="cancel()">
-            Cancelar
-          </b-button>
-        </template>
-
       </b-container>   
     </div> 
   </div>
@@ -147,6 +147,39 @@
   .botonModal {
     border-radius: 15px;
   }
+
+  .terrenosDisponibles {
+    margin: 10%;
+    font-family: "Raleway", sans-serif !important;
+    
+  }
+
+  .cards-container {
+    margin-top: 2%;
+    margin: 5 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+  }
+
+  .cards-container > .item {
+    height: 100%;
+  
+  }
+
+  .cards-container .item .title__item p {
+    border-radius: 5px;
+    background-color: #34b233;
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .list-card li {
+    list-style: none;
+  }
+
 </style>
 
 <script>
