@@ -17,9 +17,9 @@ export default new Vuex.Store({
   actions: {
     
     async registrarTerritorio({commit}, objTerritorio){
-      console.log('objterritorio.. '+objTerritorio);
+      
       //POST
-      const peticion = await fetch('http://localhost:3000/territory', {
+      const peticion = await fetch('https://ruralparcel-backend1.herokuapp.com/territory', {
         method: 'POST',
         headers:{
           'Content-Type': 'application/json'
@@ -28,7 +28,8 @@ export default new Vuex.Store({
       });
       const data = await peticion.json();
       commit('pushTerritorio', data);
-      console.log(data);
+      window.location = '/';
+      
     }
     
   },

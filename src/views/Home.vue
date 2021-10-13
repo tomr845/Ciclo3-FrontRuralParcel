@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <div>
+
+      <h2 class="terrenosDisponibles" v-if="arrayTerrenos.length == 0">No hay terrenos registrados para mostrar</h2>
+
       <b-container  class="cards-container">
-        
-        <h2 class="terrenosDisponibles" v-if="arrayTerrenos.length == 0">No hay terrenos registrados para mostrar</h2>
 
         <b-card-group deck v-for="terreno of arrayTerrenos" class="title__item">
           <b-card
@@ -146,14 +147,14 @@ export default {
         })
       },
       getTerritorios() {
-        fetch('http://localhost:3000/territory')
+        fetch('https://ruralparcel-backend1.herokuapp.com/territory')
           .then(res => res.json())
           .then(data => {
             this.arrayTerrenos = data;
           });
       },
       deleteTerreno(id) {
-        fetch('http://localhost:3000/territory/', {
+        fetch('https://ruralparcel-backend1.herokuapp.com/territory', {
           method: 'DELETE',
           headers: {
             'Accept': 'application/json',

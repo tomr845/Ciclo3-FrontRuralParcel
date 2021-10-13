@@ -150,7 +150,7 @@ import store from '../store/index.js';
 
             onSubmit(event) {
                 event.preventDefault()
-                alert(JSON.stringify(this.form))
+                
             },
             onReset(event) {
                 event.preventDefault()
