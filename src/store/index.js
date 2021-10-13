@@ -22,6 +22,8 @@ export default new Vuex.Store({
       const peticion = await fetch('https://ruralparcel-backend1.herokuapp.com/territory', {
         method: 'POST',
         headers:{
+          'Access-Control-Allow-Origin': '*',
+          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(objTerritorio)

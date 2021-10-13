@@ -147,16 +147,25 @@ export default {
         })
       },
       getTerritorios() {
-        fetch('https://ruralparcel-backend1.herokuapp.com/territory')
-          .then(res => res.json())
-          .then(data => {
-            this.arrayTerrenos = data;
-          });
+        fetch('https://ruralparcel-backend1.herokuapp.com/territory', {
+          method: 'GET',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+
+        })
+        .then(res => res.json())
+        .then(data => {
+          this.arrayTerrenos = data;
+        });
       },
       deleteTerreno(id) {
         fetch('https://ruralparcel-backend1.herokuapp.com/territory', {
           method: 'DELETE',
           headers: {
+            'Access-Control-Allow-Origin': '*',
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
