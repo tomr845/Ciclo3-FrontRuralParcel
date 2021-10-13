@@ -147,7 +147,7 @@ export default {
         })
       },
       getTerritorios() {
-        fetch('https://ruralparcel-backend1.herokuapp.com/territory', {
+        fetch('http://localhost:3000/territory', {
           method: 'GET',
           headers: {
             'Access-Control-Allow-Origin': '*',
@@ -162,7 +162,7 @@ export default {
         });
       },
       deleteTerreno(id) {
-        fetch('https://ruralparcel-backend1.herokuapp.com/territory', {
+        fetch('http://localhost:3000/territory', {
           method: 'DELETE',
           headers: {
             'Access-Control-Allow-Origin': '*',

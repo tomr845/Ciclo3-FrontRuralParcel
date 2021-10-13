@@ -19,7 +19,7 @@ export default new Vuex.Store({
     async registrarTerritorio({commit}, objTerritorio){
       
       //POST
-      const peticion = await fetch('https://ruralparcel-backend1.herokuapp.com/territory', {
+      const peticion = await fetch('http://localhost:3000/territory', {
         method: 'POST',
         headers:{
           'Access-Control-Allow-Origin': '*',
