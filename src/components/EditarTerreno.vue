@@ -1,5 +1,6 @@
 <template>
   <div class="about tamanioVista">
+    <h1>Editar Terreno</h1>
     <b-container>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="border-light">
         <b-form-group class="margenInputs" id="input-group-1" label="Cantidad de hectáreas" label-for="input-1">
@@ -74,17 +75,19 @@
           ></b-form-select>
         </b-form-group>
 
-        <b-button  type="submit" variant="primary" class="boton" @click="crear">Crear</b-button>
+        <b-button  type="submit" variant="primary" class="boton" @click="crear">Guardar</b-button>
+        <b-button  type="submit" variant="outline-danger" class="boton" href="/">Cancelar</b-button>
       </b-form>
     </b-container>
   </div>
 </template>
 
+
 <style scoped>
   .boton{
-    margin: 2%;
+    margin: 3%;
     border-radius: 18px;
-    width: 60%;
+    width: 30%;
   }
 
   .tamanioVista {
@@ -95,8 +98,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 3%;
-    margin-bottom: 2%
+    margin-top: 0.5%;
+    margin-bottom: 1%;
   }
 
   .margenInputs {
@@ -106,6 +109,13 @@
 
   .espacioCampos{
     margin-top: 1%;
+  }
+
+  h1{
+    font-size: 40px;
+    font-family: "Raleway", sans-serif !important;
+    font-weight: normal;
+    margin: 5%;
   }
 </style>
 
